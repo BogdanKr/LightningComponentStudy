@@ -1,0 +1,10 @@
+<!--
+ - Created by Bogdan on 28.09.2020.
+ -->
+
+<apex:page id="ShowImage">
+
+  <apex:image
+              url="{!URLFOR($Resource.vfimagetest, 'cats/kitten1.jpg')}"/>
+
+</apex:page>

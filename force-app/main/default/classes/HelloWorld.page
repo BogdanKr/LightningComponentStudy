@@ -1,0 +1,16 @@
+<!--
+ - Created by Bogdan on 25.09.2020.
+ -->
+
+<apex:page id="HelloWorld" sideBar="false" showHeader="false">
+  <h1>Hello World</h1>
+  <p>This is my first page</p>
+  <apex:pageBlock title="A Block Title">
+     <apex:pageBlockSection title="A Section Block">
+       I'm three components deep!
+     </apex:pageBlockSection>
+    <apex:pageBlockSection title="A new section">
+      This is another section!
+    </apex:pageBlockSection>
+  </apex:pageBlock>
+</apex:page>

@@ -1,0 +1,7 @@
+<!--
+ - Created by Bogdan on 25.09.2020.
+ -->
+
+<apex:page id="DisplayImage" sideBar="false" showHeader="false">
+  <apex:image value="https://developer.salesforce.com/files/salesforce-developer-network-logo.png"/>
+</apex:page>
