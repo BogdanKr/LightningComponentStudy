@@ -4,16 +4,15 @@
 
 ({
   // Load expenses from Salesforce
-  doInit: function(component, event, helper) {
+  doInit: function (component, event, helper) {
     // Create the action
     let action = component.get("c.getItems");
     // Add callback behavior for when response is received
-    action.setCallback(this, function(response) {
+    action.setCallback(this, function (response) {
       let state = response.getState();
       if (state === "SUCCESS") {
         component.set("v.items", response.getReturnValue());
-      }
-      else {
+      } else {
         console.log("Failed with state: " + state);
       }
     });
@@ -21,28 +20,29 @@
     $A.enqueueAction(action);
   },
 
-  clickCreateItem: function(component, event, helper) {
-    let validCampingItem = component.find('campingItemForm').reduce(function (validSoFar, inputCmp) {
-      // Displays error messages for invalid fields
-      inputCmp.showHelpMessageIfInvalid();
-      return validSoFar && inputCmp.get('v.validity').valid;
-    }, true);
-    // If we pass error checking, do some real work
-    if(validCampingItem){
-      // Create the new item
-      let newCampingItem = component.get("v.newItem");
-      console.log("Create camping item: " + JSON.stringify(newCampingItem));
-      helper.createItem(component, newCampingItem);
-
-
-      // let theItems = component.get("v.items");
-      // // Copy the item to a new item
-      // let newItem = JSON.parse(JSON.stringify(newCampingItem));
-      // theItems.push(newItem);
-      // component.set("v.items", theItems);
-      //
-      // component.set("v.newItem", "{'sobjectType': 'Camping_Item__c', 'Name':'', 'Quantity__c': 0, 'Price__c': 0,'Packed__c': false}" );
-
-    }
+  handleAddItem : function (component, event, helper){
+    let newItem = event.getParam("item");
+    let action = component.get("c.saveItem");
+    action.setParams({
+      "item": item
+    });
+    action.setCallback(this, function(response){
+      let state = response.getState();
+      if (state === "SUCCESS") {
+        let items = component.get("v.items");
+        items.push(response.getReturnValue());
+        component.set("v.items", items);
+      }
+    });
+    $A.enqueueAction(action);
   }
+
+  // let theItems = component.get("v.items");
+  // // Copy the item to a new item
+  // let newItem = JSON.parse(JSON.stringify(newCampingItem));
+  // theItems.push(newItem);
+  // component.set("v.items", theItems);
+  //
+  // component.set("v.newItem", "{'sobjectType': 'Camping_Item__c', 'Name':'', 'Quantity__c': 0, 'Price__c': 0,'Packed__c': false}" );
+
 });

@@ -1,0 +1,7 @@
+<!--
+ - Created by Bogdan on 01.10.2020.
+ -->
+
+<aura:event type="COMPONENT" description="addItemEvent">
+  <aura:attribute name="item" type="Camping_Item__c"/>
+</aura:event>
