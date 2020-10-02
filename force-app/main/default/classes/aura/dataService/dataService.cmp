@@ -1,0 +1,43 @@
+<aura:component implements="flexipage:availableForRecordHome, force:hasRecordId">
+  <!--inherit recordId attribute-->
+  <aura:attribute name="record" type="Account"
+                  description="The record object to be displayed"/>
+  <aura:attribute name="simpleRecord" type="Account"
+                  description="A simplified view record object to be displayed"/>
+  <aura:attribute name="recordError" type="String"
+                  description="An error message bound to force:recordData"/>
+  <force:recordData aura:id="recordEditor"
+                    fields="Name,BillingCity,BillingState, AccountNumber, Website"
+                    recordId="{!v.recordId}"
+                    targetError="{!v.recordError}"
+                    targetRecord="{!v.record}"
+                    targetFields="{!v.simpleRecord}"
+                    layoutType="FULL"
+                    mode="EDIT"/>
+
+  <!-- Display a lightning card with details about the record -->
+  <lightning:card iconName="action:edit" title="{!v.record.fields.Name.value}">
+    <div class="slds-p-horizontal--small">
+      <p class="slds-text-heading--small">
+        <lightning:formattedText title="Billing City" value="{!v.simpleRecord.BillingCity}"/>
+      </p>
+      <p class="slds-text-heading--small">
+        <lightning:formattedText title="Billing State" value="{!v.simpleRecord.BillingState}"/>
+      </p>
+      <p class="slds-text-heading--small">
+        <lightning:formattedText title="Account number" value="{!v.simpleRecord.AccountNumber}"/>
+      </p>
+      <p class="slds-text-heading--small">
+        <lightning:input value="{!v.simpleRecord.Website}" label="Web Site"/>
+      </p>
+      <br/>
+      <lightning:button label="Save Account" variant="brand" onclick="{!c.handleSaveRecord}"/>
+    </div>
+  </lightning:card>
+  <!-- Display Lightning Data Service errors, if any -->
+  <aura:if isTrue="{!not(empty(v.recordError))}">
+    <div class="recordError">
+      {!v.recordError}
+    </div>
+  </aura:if>
+</aura:component>
