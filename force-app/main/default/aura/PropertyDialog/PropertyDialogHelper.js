@@ -1,0 +1,13 @@
+/**
+ * Created by Bogdan on 05.10.2020.
+ */
+
+({
+  navigateTo: function(component, recId) {
+    var navEvt = $A.get("e.force:navigateToSObject");
+    navEvt.setParams({
+      "recordId": recId
+    });
+    navEvt.fire();
+  }
+})

@@ -1,0 +1,12 @@
+<!--
+ - Created by Bogdan on 05.10.2020.
+ -->
+
+<aura:component description="PickListValues" controller="PickListController">
+  <aura:attribute name="sObjectName" type="String" />
+  <aura:attribute name="fieldName" type="String" />
+  <aura:attribute name="picklistValues" type="Object" />
+
+  <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+</aura:component>
